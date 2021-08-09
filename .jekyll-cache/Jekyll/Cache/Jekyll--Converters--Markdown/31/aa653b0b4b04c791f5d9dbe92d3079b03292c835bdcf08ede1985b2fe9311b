@@ -1,0 +1,52 @@
+I"�	<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#idea" id="markdown-toc-idea">Idea</a></li>
+  <li><a href="#contributions" id="markdown-toc-contributions">Contributions</a></li>
+  <li><a href="#model-structure" id="markdown-toc-model-structure">Model Structure</a></li>
+  <li><a href="#consistency-understanding-decoder" id="markdown-toc-consistency-understanding-decoder">Consistency Understanding Decoder</a></li>
+  <li><a href="#loss" id="markdown-toc-loss">LOSS</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+<blockquote>
+  <p>获取个性标注数据集代价比较大，个性标注数据的规模仍然是训练鲁棒性和一致性模型的障碍；真实场景下的对话往往都是persona-sparse的；标注persona-dense 的数据集代价比较大；</p>
+</blockquote>
+
+<h3 id="idea">Idea</h3>
+<blockquote>
+  <p>本文认为个性一致性生成任务可以分解为两个步骤:</p>
+  <blockquote>
+    <ol>
+      <li>个性理解</li>
+      <li>对话生成  <br />
+分解成两个独立的模块，一致性理解子任务中可以使用非对话数据集进行一致性训练</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>overview</p>
+
+  <blockquote>
+    <p>$F_G(R_1|P,Q) $   给定个性P和查询Q,使用Encoder-Decoder（E-D1）框架生成粗糙的回复R_1<br />
+$F_U(P,R_1) $  给定回复R_1和P使用使用双向的Decoder生成最后的回复R_2</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="contributions">Contributions</h3>
+<ol>
+  <li>We disentangled the task of persona-based dialogue generation into two sub-tasks: consistency understanding and dialogue generation.</li>
+  <li>A BERT-based generative framework, BoB,was proposed for training persona-based dialogue models from limited data</li>
+  <li>An unlikelihood training method with non-dialogue inference data was introduced to enhance persona consistency understanding</li>
+</ol>
+
+<h3 id="model-structure">Model Structure</h3>
+<p><img src="../img/BOB.png" alt="BERT Over BERT" title="BERT Over BERT for Training Persona-based Dialogue Models from Limited Personalized Data" /></p>
+
+<h3 id="consistency-understanding-decoder">Consistency Understanding Decoder</h3>
+<p>对文本蕴含数据集entailed pairs 标记为 $D^+$,contradicted pairs 标记为$D^-$; positive pairs 使用NLL损失，negatives pais 使用 unlikelihood 损失；</p>
+
+<h3 id="loss">LOSS</h3>
+<p>$ L = L_{D_1} + \alpha L_{D_2} + \beta L^{D_2^+} + (1-\beta)L^{D^-} $</p>
+
+:ET

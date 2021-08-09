@@ -1,0 +1,111 @@
+I"� <ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#mrc" id="markdown-toc-mrc">MRC</a>    <ul>
+      <li><a href="#coqa会话阅读理解" id="markdown-toc-coqa会话阅读理解">CoQA会话阅读理解</a></li>
+      <li><a href="#hotpotqa推理式阅读理解" id="markdown-toc-hotpotqa推理式阅读理解">HotpotQA推理式阅读理解</a></li>
+      <li><a href="#natural-questions开放领域阅读理解" id="markdown-toc-natural-questions开放领域阅读理解">Natural Questions开放领域阅读理解</a></li>
+      <li><a href="#squad-dataset-抽取形式" id="markdown-toc-squad-dataset-抽取形式">Squad Dataset 抽取形式</a></li>
+      <li><a href="#ms-marco生成式" id="markdown-toc-ms-marco生成式">MS MARCO生成式</a></li>
+      <li><a href="#triviaqa偏抽取" id="markdown-toc-triviaqa偏抽取">TriviaQa（偏抽取）</a></li>
+      <li><a href="#dureader抽取形式" id="markdown-toc-dureader抽取形式">DuReader抽取形式</a></li>
+    </ul>
+  </li>
+  <li><a href="#数据集下载" id="markdown-toc-数据集下载">数据集下载</a>    <ul>
+      <li><a href="#download-glove" id="markdown-toc-download-glove">Download GloVe</a></li>
+      <li><a href="#download-coqa-data" id="markdown-toc-download-coqa-data">Download COQA Data</a></li>
+      <li><a href="#download-hotpot-data" id="markdown-toc-download-hotpot-data">Download Hotpot Data</a></li>
+      <li><a href="#download-squad-data" id="markdown-toc-download-squad-data">Download Squad Data</a></li>
+      <li><a href="#download-download-triviaqa" id="markdown-toc-download-download-triviaqa">Download Download TriviaQa</a></li>
+      <li><a href="#download-ms-marco" id="markdown-toc-download-ms-marco">Download MS MARCO</a></li>
+      <li><a href="#download-dureader" id="markdown-toc-download-dureader">Download DuReader</a></li>
+      <li><a href="#download-natural-questions" id="markdown-toc-download-natural-questions">Download Natural Questions</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="前言">前言</h3>
+
+<p>MRC（机器阅读理解）是NLP（自然语言处理）领域极具挑战性的研究课题。MRC的任务形式多种多样：生成式问答、多跳式问答、对话式问答、开放领域问答、抽取式问答、知识库问答等等。生成式问答主要特点是答案不是文中的连续片段，要求模型能够结合问题和文章内容生成一句或者一段连贯的文字作为最终的答案；多跳式问答强调的模型的推理能力，要求模型具备句间或者文章之间的逻辑推理能力；对话形式的问答是将阅读理解和对话系统结合的产物，表现形式是给定一段文字，要求模型能够根据文字内容进行一段简单的多轮对话，难点在于如何解决指代消解、如何结合历史信息推理；开放领域问答特点：数据集中的文章是一篇完整结构的文字（以往大多数文章都是单段落的），模型需要具备篇章级文字处理能力，预测答案的复杂度也随之增加；抽取式问答：答案是文章中的一个连续片段；知识库问答即KBQA；</p>
+
+<h3 id="mrc">MRC</h3>
+<blockquote>
+  <h4 id="coqa会话阅读理解">CoQA会话阅读理解</h4>
+  <blockquote>
+    <p><a href="https://stanfordnlp.github.io/coqa/">CoQA</a><br />
+<a href="https://github.com/stanfordnlp/coqa-baselines">Baseline</a><br />
+<a href="https://arxiv.org/abs/1808.07042">论文</a></p>
+    <h4 id="hotpotqa推理式阅读理解">HotpotQA推理式阅读理解</h4>
+    <p><a href="https://hotpotqa.github.io/">HotpotQA</a><br />
+<a href="https://github.com/hotpotqa/hotpot">Baseline</a><br />
+<a href="https://arxiv.org/pdf/1809.09600.pdf">论文</a></p>
+    <h4 id="natural-questions开放领域阅读理解">Natural Questions开放领域阅读理解</h4>
+    <p><a href="https://github.com/google-research/language/tree/master/language/question_answering">BERTBaseline</a><br />
+<a href="https://github.com/google-research-datasets/natural-questions">github utils</a><br />
+<a href="https://ai.google/research/pubs/pub47761">论文</a></p>
+    <h4 id="squad-dataset-抽取形式">Squad Dataset 抽取形式</h4>
+    <p><a href="https://rajpurkar.github.io/SQuAD-explorer/">Squad1.0 and Squad2.0</a><br />
+<a href="https://github.com/aswalin/SQuAD">Baseline</a><br />
+<a href="https://github.com/google-research/bert(tensorflow)">BertBaseline</a><br />
+<a href="https://github.com/gitkangkangliu/pytorch-transformers(pytorch)">BertBaseline</a><br />
+<a href="https://arxiv.org/abs/1606.05250">论文squad1.0</a><br />
+<a href="https://arxiv.org/abs/1806.03822">论文squad2.0</a></p>
+    <h4 id="ms-marco生成式">MS MARCO生成式</h4>
+    <p><a href="http://www.msmarco.org/dataset.aspx">MS MARCO</a><br />
+<a href="https://github.com/microsoft/MSMARCO-Question-Answering">Baseline</a><br />
+<a href="https://arxiv.org/abs/1611.09268">论文</a></p>
+    <h4 id="triviaqa偏抽取">TriviaQa（偏抽取）</h4>
+    <p><a href="http://nlp.cs.washington.edu/triviaqa/">TriviaQa</a><br />
+<a href="https://github.com/mandarjoshi90/triviaqa">github utils</a><br />
+<a href="https://arxiv.org/abs/1705.03551">论文</a></p>
+    <h4 id="dureader抽取形式">DuReader抽取形式</h4>
+    <p><a href="http://ai.baidu.com/broad/leaderboard">DuReader</a><br />
+<a href="https://github.com/baidu/DuReader">Baseline</a><br />
+<a href="https://www.aclweb.org/anthology/W18-2605/">论文</a></p>
+  </blockquote>
+</blockquote>
+
+<h3 id="数据集下载">数据集下载</h3>
+<blockquote>
+  <h4 id="download-glove">Download GloVe</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir wordvecs
+wget -P wordvecs http://nlp.stanford.edu/data/wordvecs/glove.42B.300d.zip
+unzip -d wordvecs wordvecs/glove.42B.300d.zip
+wget -P wordvecs http://nlp.stanford.edu/data/wordvecs/glove.840B.300d.zip
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+unzip -d wordvecs wordvecs/glove.840B.300d.zip ```
+</code></pre></div>  </div>
+  <h4 id="download-coqa-data">Download COQA Data</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir data
+wget -P data https://nlp.stanford.edu/data/coqa/coqa-train-v1.0.json
+wget -P data https://nlp.stanford.edu/data/coqa/coqa-dev-v1.0.json
+</code></pre></div>  </div>
+  <h4 id="download-hotpot-data">Download Hotpot Data</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json
+wget http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_fullwiki_v1.json
+wget http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_train_v1.1.json
+</code></pre></div>  </div>
+  <h4 id="download-squad-data">Download Squad Data</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir data
+wget https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json
+wget https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json
+wget https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json
+wget https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json
+</code></pre></div>  </div>
+  <h4 id="download-download-triviaqa">Download Download TriviaQa</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://nlp.cs.washington.edu/triviaqa/data/triviaqa-rc.tar.gz
+wget http://nlp.cs.washington.edu/triviaqa/data/triviaqa-unfiltered.tar.gz
+</code></pre></div>  </div>
+  <h4 id="download-ms-marco">Download MS MARCO</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>进入页面下载　http://www.msmarco.org/dataset.aspx
+</code></pre></div>  </div>
+  <h4 id="download-dureader">Download DuReader</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>进入页面下载 http://ai.baidu.com/broad/download
+</code></pre></div>  </div>
+  <h4 id="download-natural-questions">Download Natural Questions</h4>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#kaggle
+</code></pre></div>  </div>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+:ET

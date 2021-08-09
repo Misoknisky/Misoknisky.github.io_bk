@@ -1,0 +1,24 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#background" id="markdown-toc-background">Background</a></li>
+  <li><a href="#contributions" id="markdown-toc-contributions">contributions</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+<blockquote>
+  <p>以往的工作大都尝试在token-level 多样化decoder的输出来缓解encoder-decoder生成无趣、通用回复的问题，本文在Encoder结构结合CVAE在discourse-level 生增加输出的多样性。</p>
+</blockquote>
+
+<h3 id="background">Background</h3>
+<blockquote>
+  <p>先前的工作通常将对话任务看做是翻译任务，采用encoder-decoder结构进行建模，但是研究发现恩coder-decoder结构倾向生成无趣和单调的回复。两种观点：（a). 对话历史是唯一影响回复的因素，其它特征应当作为额外的特征让模型生成更具体的回复。(b) 从encoder-decoder 结构上提升回复的多样性，包括引入beam search 方法</p>
+</blockquote>
+
+<h3 id="contributions">contributions</h3>
+<blockquote>
+  <p>We present a novel neural dialog model adapted from conditional variational autoencoders  which introduces a latent variable that can capture discourse-level variations as described above<br />
+We propose Knowledge-Guided CVAE which enables easy integration of expert
+knowledge and results in performance improvement and model interpretability.</p>
+</blockquote>
+
+:ET

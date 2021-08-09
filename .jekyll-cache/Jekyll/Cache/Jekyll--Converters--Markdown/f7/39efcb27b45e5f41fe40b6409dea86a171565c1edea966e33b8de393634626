@@ -1,0 +1,43 @@
+I"·<ul id="markdown-toc">
+  <li><a href="#thesis" id="markdown-toc-thesis">Thesis</a></li>
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#method" id="markdown-toc-method">Method</a></li>
+  <li><a href="#structure" id="markdown-toc-structure">Structure</a></li>
+</ul>
+
+<h3 id="thesis">Thesis</h3>
+<p>Leveraging Knowledge Bases in LSTMs for Improving Machine Reading</p>
+
+<h3 id="motivation">Motivation</h3>
+<p>Traditional Method that exploit knowledge from KBs encode knowledge as discrete indicator features.  Not only do these features generalize poorly, but they require task-specific feature engineering to achieve good performance. KBLSTM , a novel method that leverage continuous representations of kBs to enhance the performance the learning of recurrent neural networks for machine reading.</p>
+
+<h3 id="method">Method</h3>
+
+<blockquote>
+  <p>KBLSTM, an extension to bidirectional lstms. Concretely: <br />
+step1: learning embeddings of concepts in KBs using a knowledge graph embedding method.<br />
+step2: then retrieves the embeddings of candidate concepts that are related to the current word.<br />
+step3: integrates the candidate concepts into a state vector.</p>
+</blockquote>
+
+<h3 id="structure">Structure</h3>
+
+<p><img src="../img/kblstm.png" alt="Knowledge-aware Bidirectional LSTMs" title="Knowledge-aware Bidirectional LSTMs" /></p>
+
+<blockquote>
+  <p>compute an attention weight $\alpha_{ti}$ for concept vector $v_i$ via a bilinear operator 
+$\alpha_{ti} \propto exp(v_i^T W_v h_t)$<br />
+we introduce a knowledge sentinel that records the information of the current context and
+use a mixture model to allow for better tradeoff between the impact of background knowledge and information from the context:</p>
+</blockquote>
+
+<p>$b_t=\sigma(W_b h_{t-1} + U_b X_t)$</p>
+
+<p>$s_t=b_t \odot tanh(c_t)$</p>
+
+<blockquote>
+  <p>The weight on the local context is computed as:$\beta \propto exp(s_t^T W_s h_t)$<br />
+the mixture model is defined as :$m_t = \sum_{i \ni V(s_t)} \alpha_{ti} v_i + \beta_t s_t$ , where $ \sum_{i \ni V(s_t)} \alpha_{ti} + \beta_t$ =1 <br />
+The final knowledge-aware state vector $ \tilde h_t$ is computed as :$ h_t= h_t + m_t$</p>
+</blockquote>
+:ET

@@ -1,0 +1,32 @@
+I"R<ul id="markdown-toc">
+  <li><a href="#model" id="markdown-toc-model">Model</a></li>
+  <li><a href="#retrieval-based-method" id="markdown-toc-retrieval-based-method">Retrieval-based Method</a></li>
+  <li><a href="#nmt" id="markdown-toc-nmt">NMT</a></li>
+  <li><a href="#context-generator" id="markdown-toc-context-generator">Context Generator</a></li>
+</ul>
+
+<h3 id="model">Model</h3>
+<p><img src="../img/stc.png" alt="Short-Text Conversation" title="Short-Text Conversation" /></p>
+
+<h3 id="retrieval-based-method">Retrieval-based Method</h3>
+<blockquote>
+  <ol>
+    <li>the responses are pre-existed and hard to be customized for the particular text or requirement from the task<br />
+the use of matching features alone is usually not sufficient for distinguishing positive responses from negative ones</li>
+  </ol>
+</blockquote>
+
+<h3 id="nmt">NMT</h3>
+<blockquote>
+  <ol>
+    <li>the responsesare not semantically equivalent to the posts as in translation.
+      <h3 id="context-generator">Context Generator</h3>
+    </li>
+    <li>using the last hidden state of RNN</li>
+    <li>using the soft attention mechanism. at time t: compute context representation between $s_t$ and $H={h_1,h_2,…,h_t}$</li>
+    <li>combine the above two methods
+<img src="../img/context_generator.png" alt="conext generator" title="conext generator" /></li>
+  </ol>
+</blockquote>
+
+:ET

@@ -1,0 +1,71 @@
+I"<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#contributions" id="markdown-toc-contributions">Contributions</a></li>
+  <li><a href="#skg-model" id="markdown-toc-skg-model">SKG Model</a>    <ul>
+      <li><a href="#question-and-paragraph-modeling" id="markdown-toc-question-and-paragraph-modeling">Question and Paragraph Modeling</a></li>
+      <li><a href="#knowledge-sub-graph-construction" id="markdown-toc-knowledge-sub-graph-construction">Knowledge Sub-Graph Construction</a></li>
+      <li><a href="#graph-attention" id="markdown-toc-graph-attention">Graph Attention</a></li>
+    </ul>
+  </li>
+  <li><a href="#output-layer" id="markdown-toc-output-layer">Output Layer</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+<p>之前的方法通常使用序列模型获取知识表示，不能获取到知识的结构化信息，论文提出了一个SKG(Structural Knowledge Graph-aware Network)模型。</p>
+<blockquote>
+  <p>构建的子图包含context和 external knowledge nodes，保留了图结构信息 <br />
+动态的更新图节点的表示</p>
+</blockquote>
+
+<h3 id="contributions">Contributions</h3>
+<p>首先基于context和外部知识构建子图，使用知识表示的方法初始化知识的表示；</p>
+<blockquote>
+  <p>提出了一个简单的从知识图谱构建子图的方法<br />
+使用Graph attention Network 动态的更新知识的表示</p>
+</blockquote>
+
+<h3 id="skg-model">SKG Model</h3>
+<p><img src="../img/Knowledge-Graph-aware-Network.png" alt="Structural Knowledge Graph-aware Network" title="Structural Knowledge Graph-aware Network" /></p>
+
+<ul>
+  <li>
+    <h4 id="question-and-paragraph-modeling">Question and Paragraph Modeling</h4>
+    <blockquote>
+      <p>输入 [CLS] question [SEP] paragraph [SEP] <br />
+The final hidden output from BERT for the i th input token is denoted as$t_{bi}= \in R^H$,H is hidden size</p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="knowledge-sub-graph-construction">Knowledge Sub-Graph Construction</h4>
+    <blockquote>
+      <p>We first use knowledge graph embedding approach to generate the initial representation of nodes and edges in terms of the whole knowledge graph.<br />
+We consider a knowledge triple in a knowledge graph as (head,relation,tail). For the $i^{th}$ token $t_i$ in paragraph,we retrieve all triples whose head or tail contains lemmas of the token.<br />
+Take token “shortage” as example,we retrieve a triple like “(shortage, related to, lack)” one of  all triples whose head or tail contain the token “shortage”. Then retrieve the neighbor triple of them,and reserve ones that contain lemmas of any token of the question.<br />
+We reorganize these triples into a sub-graph via connecting identical entities and reserving the relations as edges in these triples.
+<img src="../img/subgraph-skg.png" alt="subgraph example" title="subgraph example" /></p>
+    </blockquote>
+  </li>
+  <li>
+    <h4 id="graph-attention">Graph Attention</h4>
+    <blockquote>
+      <p>For the $i^{th} $ token $t_i$ in the paragraph,its sub-graph is $g_i={n_1.n_2,n_3,…,n_k}$,k is the number of the node,and $N_j$ is the set of the $i^{th}$ node neighbors .<br />
+The representaions of the nodes is updated L times<br />
+At the $L^{th}$ update,the updating rules are designed to model interaction between the $j^{th}$ node and its neighbor nodes.
+$h_j^{l+1}=\sum_{n=1}^{N_j}\alpha_nt_n^l $ <br />
+$\alpha_n=\frac{exp\beta_n}{\sum_{j=1}^{N_j}exp(\beta_j)}$<br />
+$\beta_n=(W_r^lr_n^l)^Ttanh(W_h^lh_n^l + W_t^lt_n^l)$<br />
+where $h_j^l in R^d$ is hidden state of the $j{th}$ node,and its neighbor’s hidden state is $t_n^l$<br />
+After l updates ,we can get the final hidden state of the central node as the final representation,which can be denoted as $t_{k_i}$</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="output-layer">Output Layer</h3>
+<blockquote>
+  <p>We combine this knowledge representation $t_{k_i}$ ,with the textual representation $t_{b_i}$ via sigmoid gate <br />
+$ w_i = \sigma (W[t_{b_i};t_{k_i}]) $<br />
+$ \bar t_i=w_i \bigodot  t_{b_i} + (1 - w_i) \bigodot  \bar t_{k_i} $  we denote $ T={ \bar t_1,\bar t_2,…,\bar t_n}$ as the final representation.<br />
+We study a start vector $ S \in R^H $ and an end vector $ E \in R^H $.Then the probability of the  $ i^{th} $ token being the start of the answer span is computed as a dot product between $T_i$ and S followed by a softmax over all of the words in the paragraph:
+$P_i^s=\frac{e^{S \cdot T_i}}{\sum_j{e^{S \cdot T_j}}}$ and $P_i^e$ can be calculated by the same above formula.</p>
+</blockquote>
+:ET

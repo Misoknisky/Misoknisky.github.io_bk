@@ -1,0 +1,194 @@
+I"V<ul id="markdown-toc">
+  <li><a href="#latex" id="markdown-toc-latex">Latex</a>    <ul>
+      <li><a href="#latex-demo" id="markdown-toc-latex-demo">latex Demo</a></li>
+      <li><a href="#概念介绍" id="markdown-toc-概念介绍">概念介绍</a></li>
+      <li><a href="#文档组织" id="markdown-toc-文档组织">文档组织</a></li>
+      <li><a href="#数学公式" id="markdown-toc-数学公式">数学公式</a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <h2 id="latex">Latex</h2>
+  <blockquote>
+    <h3 id="latex-demo">latex Demo</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass[UTF8]{article}
+\usepackage[UTF8]{ctex}
+\begin{document}
+Hello, world,你好
+\end{document}
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <h3 id="概念介绍">概念介绍</h3>
+    <blockquote>
+      <ol>
+        <li>控制序列：是以反斜杠 \ 开头，以第一个空格或非字母 的字符结束的一串文字，比如\documentclass,它后面紧跟着的 {article} 代表这个控制序列有一个必要的参数,部分控制序列还有[]的可选参数</li>
+        <li>latex对控制序列大小写是敏感的</li>
+        <li>注释：”“后内容表示注释</li>
+        <li>\documentclass{.}\begin[.}之间是导言区，导言区出现的控制序列，往往会影响整篇文档的格式。我们通常在导言区设置页面大小、页眉页脚样式、章节标题样式等等
+Demo解析</li>
+        <li>\documentclass 是一个控制序列，{}是必选参数，决定了文档类型，除了article类之外，还有其他的文档类型，[]表示可选参数， UTF8表示编码格式</li>
+        <li>\bigin{} \end{}控制序列成对出现，这两个控制序列之间的内容被称为环境，环境属性有参数决定，以上为document属性环境，只有出现在\bigin{.} \end{.} .环境内的内容才会被显示</li>
+        <li>\usepackage 控制序列实现对三方宏包的加载，ctex宏包内部实现了对中文排版的支持，通过\usepackage[UTF8]{ctex}实现中英混排</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>Latex组织文档</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass{article}
+加入标题、作者、日期:
+\title{demo}
+\author{admin}
+\date{today}
+加载ctex宏包
+\usepackage[UTF8]{ctex}
+\begin{document}
+生成目录
+\tableofcontents
+使标题等有效显示
+\maketitle
+\section{河南省}
+河南省是。。。
+\subsection{漯河市}
+漯河市是...
+\subsubsection{舞阳县}
+舞阳县是漯河市的。。。。
+\paragraph{章华乡}
+章华乡是舞阳县的一个。。。
+\subparagraph{绳刘村}
+绳刘村是....
+\end{document}
+文档结构：在文档类 article/ctexart 中，定义了五个控制序列来调整行文组织结构。他们分别是
+\section{·}
+\subsection{·}
+\subsubsection{·}
+\paragraph{·}
+\subparagraph{·}
+在report/ctexrep中，还有\chapter{·}；在文档类book/ctexbook中，还定义了\part{·}。
+生成目录：在\maketitle控制序列之前加入\tableofcontents和之后加入效果是不一样的，尝试就可以看出效果
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <h3 id="文档组织">文档组织</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass[UTF8]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\title{demo}
+\author{admin}
+\date{today}
+\begin{document}
+\tableofcontents
+\maketitle
+第一章
+\section{人工神经网络}
+行内公式:$E=mc^2$.
+行间公式:\[E=mc^2.\]
+对公示编号:
+\begin{equation}
+c=a^2 + b^2.
+\end{equation}
+\begin{equation}
+label=log_210x.
+\end{equation}
+\begin{equation}
+z = r\cdot e^{2\pi i}.
+\end{equation}
+\subsection{神经元}
+\subsection{感知机}
+\subsection{多层感知机}
+ 第二章
+\section{卷积神经网络}
+\subsection{普通卷积}
+\subsubsection{卷积的特点与过程}
+\subsubsection{卷积核的作用}
+\subsection{深度可分离卷积}
+\subsubsection{深度可分离卷积原理}
+第三章
+\section{循环神经网络}
+第四章
+\section{Transformer}
+\end{document}
+latex公式，分为行内公式和行间公式，行内公式"$...$",行间公式"\[...\]"，如果需要对公式编号,可以使用equation环境
+\begin{equation}
+\end{equation}
+行内公式和行间公式对标点符号的要求不一样的，行内公式的标点符号应该放在数学模式的限定符之外，行间公式应当放在数学模式的限定符之内
+数学模式的上标使用^实现，下标使用_实现，默认情况下只对后边的一个字符起作用，如果上下标识多个字符需要使用{}括起来，
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <h3 id="数学公式">数学公式</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass[UTF8]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\title{Demo}
+\author{Admin}
+\date{2019-12-24}
+\begin{document}
+\tableofcontents
+\maketitle
+\section{公式编辑}
+\subsection{根号}
+$\sqrt{a^2 + b^2}$
+\[ \sqrt{4*4} = 4\]
+\begin{equation}
+\sqrt{a^2 + b^2} = c
+\end{equation}
+\subsection{分式}
+$\frac{4}{5}$
+\[ \frac{ \sqrt{a^2 + b^2}}{x + y}\]
+\begin{equation}
+\frac{\sqrt{\sqrt{a^2 + b^2}}}{10}
+\end{equation}
+\subsection{运算符}
+\[ \pm\; \times \; \div\; \cdot\; \cap\; \cup\;
+\geq\; \leq\; \neq\; \approx \; \equiv \]
+\subsection{大型运算符}
+\[ \sum_{i=1}^{i=n} a_i= 1 \]
+\[ \prod_{i=1}^{i=10} b_i = 1 \]
+\[ \lim_{x \to 0}f(x) = 1 \]
+\[ \int_{x}^{20}f(x)=1 \]
+\subsection{defaulth行内显示}
+$ \sum_{i=1}^n i\quad \prod_{i=1}^n $
+\subsection{limits行内}
+$ \sum\limits _{i=1}^n i \quad \prod\limits _{i=1}^n $
+\subsection{default行间显示}
+\[ \lim_{x\to0}x^2 \quad \int_a^b x^2 dx \]
+\subsection{nolimits}
+\[ \lim\nolimits _{x\to0}x^2\quad \int\nolimits_a^b x^2 dx \]
+\subsection{多重积分}
+%二重、三重、四重、 n重积分
+\[ \iint \quad \iiint \quad \iiiint \quad \idotsint \]
+\subsection{定界符}
+\{\} \quad [] 
+\[ \langle\langle \quad \lvert \quad \rvert\;\lVert \quad \rVert \]
+\subsection{调整定界符大小}
+$\big(\big(\big($
+\[ \bigl(x) \]
+\end{document}
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>\(\sqrt{a^2 + b^2} \quad \frac{4}{5} \quad \sqrt{4*4} = 4\)
+\(\sqrt{a^2 + b^2} = c \quad  \frac{ \sqrt{a^2 + b^2}}{x + y}\)
+\(\frac{\sqrt{\sqrt{a^2 + b^2}}}{10}\)
+\(\pm\; \times \; \div\; \cdot\; \cap\; \cup\;
+\geq\; \leq\; \neq\; \approx \; \equiv\)
+\(\sum_{i=1}^{i=n} a_i= 1 \quad  \prod_{i=1}^{i=10} b_i = 1\)
+\(\lim_{x \to 0}f(x) = 1 \quad \int_{x}^{20}f(x) dx=1\)
+\(\lim\nolimits _{x\to0}x^2\quad \int\nolimits_a^b x^2 dx\)
+\(\iint \quad \iiint \quad \iiiint \quad \idotsint\)</p>
+:ET

@@ -1,0 +1,17 @@
+{% if site.comment_gitment_repo %}
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://www.wenjunjiang.win/css/gitment.css">
+<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+<script>
+    var gitment = new Gitment({
+		id: '<%= page.date %>',
+        owner: 'Misoknisky',
+        repo: 'Misoknisky.github.io',
+        oauth: {
+            client_id: '6960975f7ee1b52c7564',
+            client_secret: '728532421ca82bd6177f2d648de50479d827b3af',
+        },
+    });
+    gitment.render('gitmentContainer')
+</script>
+{% endif %}

@@ -1,0 +1,134 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#矩阵" id="markdown-toc-矩阵">矩阵</a></li>
+  <li><a href="#图片和表格" id="markdown-toc-图片和表格">图片和表格</a></li>
+  <li><a href="#版式设置" id="markdown-toc-版式设置">版式设置</a></li>
+</ul>
+
+<h3 id="矩阵">矩阵</h3>
+<p>amsmath 的 pmatrix, bmatrix, Bmatrix, vmatrix, Vmatrix 等环境可以在矩阵两边加上各种分隔符。具体效果已运行结果为准</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass[UTF8,11pt,a4paper,twoside]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{graphics}
+\title{Matrix}
+\author{Admin}
+\date{Today}
+\begin{document}
+\tableofcontents
+\maketitle
+
+\section{Matrix}
+\[ 
+\begin{pmatrix}
+a&amp;b&amp;c \\ 123&amp;234&amp;34
+\end{pmatrix}^T \quad
+\begin{bmatrix}
+a&amp;b&amp;c \\ 123&amp;234&amp;34
+\end{bmatrix} \quad
+\begin{Bmatrix}
+a&amp;b&amp;c \\ 123&amp;234&amp;34
+\end{Bmatrix}
+\begin{vmatrix}
+a&amp;b&amp;c \\ 123&amp;234&amp;34
+\end{vmatrix}
+\begin{Vmatrix}
+a&amp;b&amp;c \\ 123&amp;234&amp;34
+\end{Vmatrix}
+\]
+$( \begin{smallmatrix}
+a&amp;b \\ c&amp;b
+\end{smallmatrix} )$
+\begin{multline}
+\sum_{i=1}^{i=n} a_i= 1 \\
+a= b +c \\
+c=a^2 + b^2 
+\end{multline}
+\begin{multline*}
+\sum_{i=1}^{i=n} a_i= 1 \\
+a= b +c \\
+c=a^2 + b^2 
+\end{multline*}
+\[ \begin{aligned}
+x ={}&amp; a+b+c+{} \\
+&amp;d+e+f+g 
+\end{aligned} \]
+\begin{gather}
+x=a+b+c \\
+c=1+x+y \\
+y=A^T + B_2
+\end{gather}
+\begin{gather*}
+x=a+b+c \\
+c=1+x+y \\
+y=A^T + B_2
+\end{gather*}
+\[
+y= \begin{cases}
+-x,x \leq 0 \\
+x,x&gt;0
+\end{cases}
+\]
+\end{document}
+</code></pre></div></div>
+<h3 id="图片和表格">图片和表格</h3>
+<p>tabular 环境提供了最简单的表格功能。它用 \hline 命令表示横线，在列格式中用 | 表示竖线；用 &amp; 来分列，用 \ 来换行；每列可以采用居左、居中、居右等横向对齐方式，分别用 l、c、r 来表示。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{graphicx}
+\begin{document}
+%插图
+\includegraphics[width=0.8\textwidth]{cat.jpg}
+%表格
+%tabular 环境提供了最简单的表格功能。它用 \hline 命令表示横线，在列格式中用 | 表示竖线；
+%用 &amp; 来分列，用 \\ 来换行；每列可以采用居左、居中、居右等横向对齐方式，分别用 l、c、r 来表示。
+\begin{tabular}
+ \hline
+操作系统&amp; 计算机网络&amp; 信息安全 \\
+ \hline
+语文&amp; 数学&amp;  物理 \\
+ \hline
+\end{tabular}
+\end{document}
+</code></pre></div></div>
+
+<h3 id="版式设置">版式设置</h3>
+<p>包括页面大小，页边距，页眉、页脚、缩进、行间距、段间距等</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%This is a very basic article template.
+%%There is just one section and two subsections.
+\documentclass{article}
+\usepackage{graphicx}
+%页边距设置
+%geometry包设置页边距
+\usepackage{geometry}
+%页面宽度20cm*15,左边距1cm,右边距2cm，顶部边距3cm，底部边距4cm
+\geometry{papersize={20cm,15cm}}
+\geometry{left=1cm,right=2cm,top=3cm,bottom=4cm}
+%页眉页脚:fancyhdr 宏包
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\author}
+\rhead{\date}
+\chead{shfdisfhs}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headwidth}{\textwidth}
+\renewcommand{\footrulewidth}{0pt}
+\begin{document}
+%浮动体,插图和表格通常需要占据大块空间，所以在文字处理软件中我们经常需要调整他们的位置。
+%figure 和 table 环境可以自动完成这样的任务；这种自动调整位置的环境称作浮动体(float)。
+%htbp 选项用来指定插图的理想位置，这几个字母分别代表 here, top, bottom, float page，
+%也就是就这里、页顶、页尾、浮动页（专门放浮动体的单独页面或分栏）。\centering 用来使插图居中；
+%\caption 命令设置插图标题，LaTeX 会自动给浮动体的标题加上编号。
+%注意 \label 应该放在标题命令之后。
+\begin{figure}[htbp]
+\centering
+\includegraphics{cat.jpg}
+\caption{picture}
+\label{fig:figure1}
+\end{figure}
+\end{document}
+
+</code></pre></div></div>
+:ET

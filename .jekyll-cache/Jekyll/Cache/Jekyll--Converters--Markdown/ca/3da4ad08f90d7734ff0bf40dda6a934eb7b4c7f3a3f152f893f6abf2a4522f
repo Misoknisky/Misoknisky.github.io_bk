@@ -1,0 +1,39 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a>    <ul>
+      <li><a href="#question" id="markdown-toc-question">Question</a></li>
+    </ul>
+  </li>
+  <li><a href="#idea" id="markdown-toc-idea">Idea</a></li>
+  <li><a href="#model" id="markdown-toc-model">Model</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+<p>以往的有了很多利用外部知识的工作，但是很少有工作表明出在对话生成的过程中整合知识的的有效性。本文利用后验知识分布指导知识的选择，生成语义更加丰富和合适的回复。</p>
+
+<h4 id="question">Question</h4>
+<p>以往在对话使用外部知识的工作虽然取得效果，但是缺乏有效的机制保证选择知识的正确性。而且大部分只关注知识和历史信息和知识的语义相似性。</p>
+<h3 id="idea">Idea</h3>
+<p>本文同时考虑历史信息和response 信息来指导知识的选择。使用后验知识分布指导知识的选择</p>
+<h3 id="model">Model</h3>
+<p><img src="../img/ksg.png" alt="KRG" title="Learning to Select Knowledge for Response Knowledge in Dialog Systems" /></p>
+
+<blockquote>
+  <ol>
+    <li>给定对话历史和就选知识，使用 Encoder 对历史信息$x$和knowledge$ K$进行编码。训练阶段：正确的response 可以使用，同时对response 进行编码。</li>
+  </ol>
+</blockquote>
+
+\[P(k_i|x,y)=\frac{exp(k_i MLP([x;y])) }{\sum_j^n(exp(k_j MLP([x,y])))}\]
+
+<blockquote>
+  <ol>
+    <li>根据$P(x,y)$计算知识的概率分布</li>
+    <li>MLP is  a fully connected layer, $P(k_i|x,y)$, is posterior knowledge distribution</li>
+    <li>在测试阶段，$y $ 是不可用的，本文使用知识的先验概率分布$p(k_i |x)$模拟后验分布</li>
+    <li>文中加入了BOW损失，保证选择的知识和目标response的相关性</li>
+  </ol>
+</blockquote>
+
+\[p_{\theta}(y_t|k_i)=\frac{exp(e_{y_t})}{\sum_{v \in V} exp(w_v)}\]
+
+:ET

@@ -1,0 +1,11 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#一维卷积作用" id="markdown-toc-一维卷积作用">一维卷积作用</a></li>
+  <li><a href="#bn和ln" id="markdown-toc-bn和ln">BN和LN</a></li>
+</ul>
+
+<h3 id="一维卷积作用">一维卷积作用</h3>
+<p>在CV中一维卷积在不改变feature  map大小的情况下可以增加网络深度；同时通过调整输出通道的大小实现降维和升维的作用。</p>
+
+<h3 id="bn和ln">BN和LN</h3>
+
+:ET

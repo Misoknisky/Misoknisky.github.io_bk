@@ -1,0 +1,112 @@
+I"s<ul id="markdown-toc">
+  <li><a href="#标题" id="markdown-toc-标题">标题</a></li>
+  <li><a href="#段落" id="markdown-toc-段落">段落</a></li>
+  <li><a href="#列表" id="markdown-toc-列表">列表</a></li>
+  <li><a href="#列表嵌套" id="markdown-toc-列表嵌套">列表嵌套</a></li>
+  <li><a href="#区块" id="markdown-toc-区块">区块</a></li>
+  <li><a href="#代码" id="markdown-toc-代码">代码</a></li>
+  <li><a href="#链接" id="markdown-toc-链接">链接</a></li>
+  <li><a href="#高级链接" id="markdown-toc-高级链接">高级链接</a></li>
+  <li><a href="#图片" id="markdown-toc-图片">图片</a></li>
+  <li><a href="#表格" id="markdown-toc-表格">表格</a></li>
+  <li><a href="#markdown-公式略" id="markdown-toc-markdown-公式略">markdown 公式略</a></li>
+</ul>
+<h3 id="标题">标题</h3>
+<p>使用#表示标题，一个#号表示一级标题，二个#号表示二级标题， 依次类推，markdown语法的空格比较重要</p>
+<h3 id="段落">段落</h3>
+<p>使用连个空格加以上回车表示段落，直接书写就行</p>
+<h3 id="列表">列表</h3>
+<ul>
+  <li>无序列表使用星号(*)、加号(+)或是减号(-)</li>
+  <li>减号(-)</li>
+  <li>加号(+)</li>
+</ul>
+
+<p>作为列表标记，这些标记后面要添加一个空格 <br />
+有序列表使用数字并加上 . 号来表示</p>
+<ol>
+  <li>这是有序列表</li>
+  <li>item2</li>
+  <li>item3</li>
+</ol>
+
+<h3 id="列表嵌套">列表嵌套</h3>
+<p>列表之间可以相互嵌套，列表嵌套只需在子列表中的选项前面添加四个空格即可</p>
+<ol>
+  <li>第一章
+    <ul>
+      <li>第1.1小节
+        <ul>
+          <li>第1.1.1小节</li>
+          <li>第1.1.2 小节</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>第二章
+    <ol>
+      <li>小节</li>
+      <li>小节
+        <ol>
+          <li>小节</li>
+          <li>小节</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="区块">区块</h3>
+<p>区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个空格符号:<br />
+另外区块是可以嵌套的，一个 &gt; 符号是最外层，两个 &gt; 符号是第一层嵌套，以此类推：</p>
+<h3 id="代码">代码</h3>
+<p>如果是段落上的一个函数或片段的代码可以用反引号把它包起来（`），例如：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javascript
+$(document).ready(function () {
+    alert('RUNOOB');
+});
+</code></pre></div></div>
+
+<h3 id="链接">链接</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[链接名称](链接地址)
+</code></pre></div></div>
+<h3 id="高级链接">高级链接</h3>
+
+<p>我们可以通过变量来设置一个链接，变量赋值在文档末尾进行：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>这个链接用 1 作为网址变量 [Google][1]
+这个链接用 runoob 作为网址变量 [Runoob][runoob]
+然后在文档的结尾为变量赋值（网址）
+
+  [1]: http://www.google.com/
+  [runoob]: http://www.runoob.com/
+</code></pre></div></div>
+<p>这个链接用1作为网址变量 [Google][1]<br />
+这个链接用 runoob 作为网址变量 [Runoob][runoob]<br />
+然后在文档的结尾为变量赋值（网址）<br />
+[1]: http://www.google.com/
+[runoob]: http://www.runoob.com/</p>
+<h3 id="图片">图片</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![alt 属性文本](图片地址 "可选标题")
+for example
+![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png "RUNOOB")
+</code></pre></div></div>
+<h3 id="表格">表格</h3>
+<p>Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
+-: 设置内容和标题栏居右对齐。
+:- 设置内容和标题栏居左对齐。
+:-: 设置内容和标题栏居中对齐。
+</code></pre></div></div>
+<p>| 左对齐 | 右对齐 | 居中对齐 |
+| :—–| —-: | :—-: |
+| 单元格 | 单元格 | 单元格 |
+| 单元格 | 单元格 | 单元格 |</p>
+
+<h3 id="markdown-公式略">markdown 公式略</h3>
+<p>参考latex语法</p>
+
+:ET

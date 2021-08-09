@@ -1,0 +1,591 @@
+I"=]<ul id="markdown-toc">
+  <li><a href="#classic-datasets" id="markdown-toc-classic-datasets">Classic Datasets</a></li>
+  <li><a href="#performance" id="markdown-toc-performance">Performance</a></li>
+  <li><a href="#ubuntu-corpus" id="markdown-toc-ubuntu-corpus">Ubuntu Corpus</a></li>
+  <li><a href="#douban-conversation-corpus" id="markdown-toc-douban-conversation-corpus">Douban Conversation Corpus</a></li>
+  <li><a href="#msdialog" id="markdown-toc-msdialog">MSDialog</a></li>
+  <li><a href="#e-commerce-corpus" id="markdown-toc-e-commerce-corpus">E-commerce Corpus</a></li>
+</ul>
+
+<p><strong>Response retrieval</strong>/selection aims to rank/select a proper response from a dialog repository.
+Automatic conversation (AC) aims to create an automatic human-computer dialog process for the purpose of question answering, task completion, and social chat (i.e., chit-chat). In general, AC could be formulated either as an IR problem that aims to rank/select a proper response from a dialog repository or a generation problem that aims to generate an appropriate response with respect to the input utterance. Here, we refer response retrieval as the IR-based way to do AC.</p>
+
+<h3 id="classic-datasets">Classic Datasets</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th>Partition</th>
+      <th>#Context Response pair</th>
+      <th>#Candidate per Context</th>
+      <th>Positive:Negative</th>
+      <th>Avg #turns per context</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UDC</td>
+      <td>train</td>
+      <td>1M</td>
+      <td>2</td>
+      <td>1:1</td>
+      <td>10.13</td>
+    </tr>
+    <tr>
+      <td>UDC</td>
+      <td>validation</td>
+      <td>500k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>10.11</td>
+    </tr>
+    <tr>
+      <td>UDC</td>
+      <td>test</td>
+      <td>500k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>10.11</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><strong>Douban</strong></a></td>
+      <td>train</td>
+      <td>1M</td>
+      <td>2</td>
+      <td>1:1</td>
+      <td>6.69</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><strong>Douban</strong></a></td>
+      <td>validation</td>
+      <td>50k</td>
+      <td>2</td>
+      <td>1:1</td>
+      <td>6.75</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><strong>Douban</strong></a></td>
+      <td>test</td>
+      <td>10k</td>
+      <td>10</td>
+      <td>1.18:8.82</td>
+      <td>6.45</td>
+    </tr>
+    <tr>
+      <td><a href="https://ciir.cs.umass.edu/downloads/msdialog/"><strong>MSDialog</strong></a></td>
+      <td>train</td>
+      <td>173k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <td><a href="https://ciir.cs.umass.edu/downloads/msdialog/"><strong>MSDialog</strong></a></td>
+      <td>validation</td>
+      <td>37k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <td><a href="https://ciir.cs.umass.edu/downloads/msdialog/"><strong>MSDialog</strong></a></td>
+      <td>test</td>
+      <td>35k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>4.4</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><strong>EDC</strong></a></td>
+      <td>train</td>
+      <td>1M</td>
+      <td>2</td>
+      <td>1:1</td>
+      <td>5.51</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><strong>EDC</strong></a></td>
+      <td>validation</td>
+      <td>10k</td>
+      <td>2</td>
+      <td>1:1</td>
+      <td>5.48</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><strong>EDC</strong></a></td>
+      <td>test</td>
+      <td>10k</td>
+      <td>10</td>
+      <td>1:9</td>
+      <td>5.64</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Ubuntu Dialog Corpus (UDC) contains multi-turn dialogues collected from chat logs of the Ubuntu Forum. The data set consists of 1 million context-response pairs for training, 0.5 million pairs for validation, and 0.5 million pairs for testing. Positive responses are true responses from humans, and negative ones are randomly sampled. The ratio of the positive and the negative is 1:1 in training, and 1:9 in validation and testing.</li>
+  <li><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><strong>Douban Conversation Corpus</strong></a> is an open domain dataset constructed from Douban group (a popular social networking service in China). The data set consists of 1 million context-response pairs for training, 50k pairs for validation, and 10k pairs for testing, corresponding to 2, 2, and 10 response candidates per context respectively. Response candidates on the test set, retrieved from Sina Weibo (the largest microblogging service in China), are labeled by human judges.</li>
+  <li><a href="https://ciir.cs.umass.edu/downloads/msdialog/"><strong>MSDialog</strong></a> is a labeled dialog dataset of question answering (QA) interactions between information seekers and answer providers from an online forum on Microsoft products (Microsoft Community). The dataset contains more than 2,000 multi-turn information-seeking conversations with 10,000 utterances that are annotated with user intent on the utterance level.</li>
+  <li><a href="https://github.com/cooelf/DeepUtteranceAggregation"><strong>E-commerce Dialogue Corpus</strong></a>  contains over 5 types of conversations (e.g. commodity consultation, logistics express, recommendation, negotiation and chitchat) based on over 20 commodities. The ratio of the positive and the negative
+is 1:1 in training and validation, and 1:9 in testing.</li>
+</ul>
+
+<p>$R_n@k$: recall at position $k$ in $n$ candidates.</p>
+
+<h3 id="performance">Performance</h3>
+
+<h3 id="ubuntu-corpus">Ubuntu Corpus</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Code</th>
+      <th>MAP</th>
+      <th>$R_2@1$</th>
+      <th>$R_{10}@1$</th>
+      <th>$R_{10}@2$</th>
+      <th>$R_{10}@5$</th>
+      <th>Paper</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Multi-View (Zhou et al. 2016)</td>
+      <td>N/A</td>
+      <td>—</td>
+      <td>0.908</td>
+      <td>0.662</td>
+      <td>0.801</td>
+      <td>0.951</td>
+      <td><a href="https://www.aclweb.org/anthology/D16-1036.pdf">Multi-view Response Selection for Human-Computer Conversation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DL2R (Yan, Song and Wu 2016)</td>
+      <td>N/A</td>
+      <td>—</td>
+      <td>0.899</td>
+      <td>0.626</td>
+      <td>0.783</td>
+      <td>0.944</td>
+      <td><a href="http://www.ruiyan.me/pubs/SIGIR2016.pdf">Learning to Respond with Deep Neural Networks for Retrieval-Based Human-Computer Conversation System</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SMN (Wu et al. 2017)</td>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.7327</td>
+      <td>0.927</td>
+      <td>0.726</td>
+      <td>0.847</td>
+      <td>0.962</td>
+      <td><a href="https://www.aclweb.org/anthology/P17-1046.pdf">Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>Multi-turn</td>
+    </tr>
+    <tr>
+      <td>DAM(Zhou et al. 2018)</td>
+      <td><a href="https://github.com/baidu/Dialogue/tree/master/DAM"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.938</td>
+      <td>0.767</td>
+      <td>0.874</td>
+      <td>0.969</td>
+      <td><a href="https://www.aclweb.org/anthology/P18-1103.pdf">Multi-Turn Response Selection for Chatbots with Deep Attention Matching Network</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DUA (Zhang et al. 2018)</td>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>—</td>
+      <td>0.752</td>
+      <td>0.868</td>
+      <td>0.962</td>
+      <td><a href="https://arxiv.org/pdf/1806.09102.pdf">Modeling Multi-turn Conversation with Deep Utterance Aggregation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DMN (Yang et al. 2018)</td>
+      <td><a href="https://github.com/yangliuy/NeuralResponseRanking"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.7719</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td><a href="https://arxiv.org/pdf/1805.00188.pdf">Response Ranking with Deep Matching Networks and External Knowledge in Information-seeking Conversation Systems</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>U2U-IMN(Gu et al. 2019 a)</td>
+      <td><a href="https://github.com/JasonForJoy/U2U-IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td><strong>0.866</strong></td>
+      <td>0.945</td>
+      <td>0.790</td>
+      <td>0.886</td>
+      <td>0.973</td>
+      <td><a href="https://arxiv.org/pdf/1911.06940v1.pdf">Utterance-to-Utterance Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>TripleNet(Ma et al. 2019)</td>
+      <td><a href="https://github.com/wtma/TripleNet."><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.943</td>
+      <td>0.79</td>
+      <td>0.885</td>
+      <td>0.97</td>
+      <td><a href="https://arxiv.org/pdf/1909.10666v2.pdf">TripleNet: Triple Attention Network for Multi-Turn Response Selection in Retrieval-based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IMN(Gu et al. 2019 b)</td>
+      <td><a href="https://github.com/JasonForJoy/IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.946</td>
+      <td>0.794</td>
+      <td>0.889</td>
+      <td>0.974</td>
+      <td><a href="https://arxiv.org/pdf/1901.01824v2.pdf">Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IOI-local(Tao et al. 2019)</td>
+      <td><a href="https://github.com/chongyangtao/IOI"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.947</td>
+      <td>0.796</td>
+      <td>0.894</td>
+      <td>0.974</td>
+      <td><a href="https://www.aclweb.org/anthology/P19-1001.pdf">One Time of Interaction May Not Be Enough: Go Deep with an Interaction-over-Interaction Network for Response Selection in Dialogues</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>MSN(Yuan et al. 2019)</td>
+      <td><a href="https://github.com/chunyuanY/Dialogue"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>—</td>
+      <td>0.8</td>
+      <td>0.899</td>
+      <td>0.978</td>
+      <td><a href="https://www.aclweb.org/anthology/D19-1011.pdf">Multi-hop Selector Network for Multi-turn Response Selection in Retrieval-based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SA-BERT(Gu et al. 2020)</td>
+      <td><a href="https://github.com/JasonForJoy/SA-BERT"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td><strong>0.965</strong></td>
+      <td><strong>0.855</strong></td>
+      <td><strong>0.928</strong></td>
+      <td><strong>0.983</strong></td>
+      <td><a href="https://arxiv.org/pdf/2004.03588v1.pdf">Speaker-Aware BERT for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="douban-conversation-corpus">Douban Conversation Corpus</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Code</th>
+      <th>MAP</th>
+      <th>MRR</th>
+      <th>P@1</th>
+      <th>$R_{10}@1$</th>
+      <th>$R_{10}@2$</th>
+      <th>$R_{10}@5$</th>
+      <th>Paper</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Multi-View (Zhou et al. 2016)</td>
+      <td>N/A</td>
+      <td>0.505</td>
+      <td>0.543</td>
+      <td>0.342</td>
+      <td>0.202</td>
+      <td>0.350</td>
+      <td>0.729</td>
+      <td><a href="https://www.aclweb.org/anthology/D16-1036.pdf">Multi-view Response Selection for Human-Computer Conversation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DL2R (Yan, Song and Wu 2016)</td>
+      <td>N/A</td>
+      <td>0.488</td>
+      <td>0.527</td>
+      <td>0.33</td>
+      <td>0.193</td>
+      <td>0.342</td>
+      <td>0.705</td>
+      <td><a href="http://www.ruiyan.me/pubs/SIGIR2016.pdf">Learning to Respond with Deep Neural Networks for Retrieval-Based Human-Computer Conversation System</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SMN (Wu et al. 2017)</td>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.529</td>
+      <td>0.572</td>
+      <td>0.397</td>
+      <td>0.236</td>
+      <td>0.396</td>
+      <td>0.734</td>
+      <td><a href="https://www.aclweb.org/anthology/P17-1046.pdf">Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>Multi-turn</td>
+    </tr>
+    <tr>
+      <td>DAM(Zhou et al. 2018)</td>
+      <td><a href="https://github.com/baidu/Dialogue/tree/master/DAM"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.55</td>
+      <td>0.601</td>
+      <td>0.427</td>
+      <td>0.254</td>
+      <td>0.410</td>
+      <td>0.757</td>
+      <td><a href="https://www.aclweb.org/anthology/P18-1103.pdf">Multi-Turn Response Selection for Chatbots with Deep Attention Matching Network</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DUA (Zhang et al. 2018)</td>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.551</td>
+      <td>0.599</td>
+      <td>0.421</td>
+      <td>0.243</td>
+      <td>0.421</td>
+      <td>0.780</td>
+      <td><a href="https://arxiv.org/pdf/1806.09102.pdf">Modeling Multi-turn Conversation with Deep Utterance Aggregation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>U2U-IMN(Gu et al. 2019 a)</td>
+      <td><a href="https://github.com/JasonForJoy/U2U-IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.564</td>
+      <td>0.611</td>
+      <td>0.429</td>
+      <td>0.259</td>
+      <td>0.43</td>
+      <td>0.791</td>
+      <td><a href="https://arxiv.org/pdf/1911.06940v1.pdf">Utterance-to-Utterance Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>TripleNet(Ma et al. 2019)</td>
+      <td><a href="https://github.com/wtma/TripleNet."><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.564</td>
+      <td>0.618</td>
+      <td>0.447</td>
+      <td>0.268</td>
+      <td>0.426</td>
+      <td>0.778</td>
+      <td><a href="https://arxiv.org/pdf/1909.10666v2.pdf">TripleNet: Triple Attention Network for Multi-Turn Response Selection in Retrieval-based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IMN(Gu et al. 2019 b)</td>
+      <td><a href="https://github.com/JasonForJoy/IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.570</td>
+      <td>0.615</td>
+      <td>0.433</td>
+      <td>0.262</td>
+      <td>0.452</td>
+      <td>0.789</td>
+      <td><a href="https://arxiv.org/pdf/1901.01824v2.pdf">Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IOI-local(Tao et al. 2019)</td>
+      <td><a href="https://github.com/chongyangtao/IOI"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.573</td>
+      <td>0.621</td>
+      <td>0.444</td>
+      <td>0.269</td>
+      <td>0.451</td>
+      <td>0.786</td>
+      <td><a href="https://www.aclweb.org/anthology/P19-1001.pdf">One Time of Interaction May Not Be Enough: Go Deep with an Interaction-over-Interaction Network for Response Selection in Dialogues</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>MSN(Yuan et al. 2019)</td>
+      <td><a href="https://github.com/chunyuanY/Dialogue"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.587</td>
+      <td>0.632</td>
+      <td>0.470</td>
+      <td>0.295</td>
+      <td>0.452</td>
+      <td>0.788</td>
+      <td><a href="https://www.aclweb.org/anthology/D19-1011.pdf">Multi-hop Selector Network for Multi-turn Response Selection in Retrieval-based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SA-BERT(Gu et al. 2020)</td>
+      <td><a href="https://github.com/JasonForJoy/SA-BERT"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td><strong>0.619</strong></td>
+      <td><strong>0.659</strong></td>
+      <td><strong>0.496</strong></td>
+      <td><strong>0.313</strong></td>
+      <td><strong>0.481</strong></td>
+      <td><strong>0.847</strong></td>
+      <td><a href="https://arxiv.org/pdf/2004.03588v1.pdf">Speaker-Aware BERT for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="msdialog">MSDialog</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Code</th>
+      <th>MAP</th>
+      <th>Recall@5</th>
+      <th>Recall@1</th>
+      <th>Recall@2</th>
+      <th>Paper</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DMN (Yang et al. 2018)</td>
+      <td><a href="https://github.com/yangliuy/NeuralResponseRanking"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>0.6792</td>
+      <td>0.9356</td>
+      <td>0.5021</td>
+      <td>0.7122</td>
+      <td><a href="https://arxiv.org/pdf/1805.00188.pdf">Response Ranking with Deep Matching Networks and External Knowledge in Information-seeking Conversation Systems</a></td>
+      <td>multi-turn</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="e-commerce-corpus">E-commerce Corpus</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Code</th>
+      <th>MAP</th>
+      <th>$R_{10}@1$</th>
+      <th>$R_{10}@2$</th>
+      <th>$R_{10}@5$</th>
+      <th>Paper</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Multi-View (Zhou et al. 2016)</td>
+      <td>N/A</td>
+      <td>—</td>
+      <td>0.421</td>
+      <td>0.601</td>
+      <td>0.861</td>
+      <td><a href="https://www.aclweb.org/anthology/D16-1036.pdf">Multi-view Response Selection for Human-Computer Conversation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DL2R (Yan, Song and Wu 2016)</td>
+      <td>N/A</td>
+      <td>—</td>
+      <td>0.399</td>
+      <td>0.571</td>
+      <td>0.842</td>
+      <td><a href="http://www.ruiyan.me/pubs/SIGIR2016.pdf">Learning to Respond with Deep Neural Networks for Retrieval-Based Human-Computer Conversation System</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SMN (Wu et al. 2017)</td>
+      <td><a href="https://github.com/MarkWuNLP/MultiTurnResponseSelection"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.453</td>
+      <td>0.654</td>
+      <td>0.886</td>
+      <td><a href="https://www.aclweb.org/anthology/P17-1046.pdf">Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>Multi-turn</td>
+    </tr>
+    <tr>
+      <td>DAM(Zhou et al. 2018)</td>
+      <td><a href="https://github.com/baidu/Dialogue/tree/master/DAM"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.526</td>
+      <td>0.727</td>
+      <td>0.933</td>
+      <td><a href="https://www.aclweb.org/anthology/P18-1103.pdf">Multi-Turn Response Selection for Chatbots with Deep Attention Matching Network</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>DUA (Zhang et al. 2018)</td>
+      <td><a href="https://github.com/cooelf/DeepUtteranceAggregation"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.501</td>
+      <td>0.700</td>
+      <td>0.921</td>
+      <td><a href="https://arxiv.org/pdf/1806.09102.pdf">Modeling Multi-turn Conversation with Deep Utterance Aggregation</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>U2U-IMN(Gu et al. 2019 a)</td>
+      <td><a href="https://github.com/JasonForJoy/U2U-IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td><strong>0.759</strong></td>
+      <td>0.616</td>
+      <td>0.806</td>
+      <td>0.966</td>
+      <td><a href="https://arxiv.org/pdf/1911.06940v1.pdf">Utterance-to-Utterance Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IMN(Gu et al. 2019 b)</td>
+      <td><a href="https://github.com/JasonForJoy/IMN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.621</td>
+      <td>0.797</td>
+      <td>0.964</td>
+      <td><a href="https://arxiv.org/pdf/1901.01824v2.pdf">Interactive Matching Network for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>IOI-local(Tao et al. 2019)</td>
+      <td><a href="https://github.com/chongyangtao/IOI"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.563</td>
+      <td>0.768</td>
+      <td>0.950</td>
+      <td><a href="https://www.aclweb.org/anthology/P19-1001.pdf">One Time of Interaction May Not Be Enough: Go Deep with an Interaction-over-Interaction Network for Response Selection in Dialogues</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>MSN(Yuan et al. 2019)</td>
+      <td><a href="https://github.com/chunyuanY/Dialogue"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td>0.606</td>
+      <td>0.770</td>
+      <td>0.937</td>
+      <td><a href="https://www.aclweb.org/anthology/D19-1011.pdf">Multi-hop Selector Network for Multi-turn Response Selection in Retrieval-based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+    <tr>
+      <td>SA-BERT(Gu et al. 2020)</td>
+      <td><a href="https://github.com/JasonForJoy/SA-BERT"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>—</td>
+      <td><strong>0.704</strong></td>
+      <td><strong>0.879</strong></td>
+      <td><strong>0.985</strong></td>
+      <td><a href="https://arxiv.org/pdf/2004.03588v1.pdf">Speaker-Aware BERT for Multi-Turn Response Selection in Retrieval-Based Chatbots</a></td>
+      <td>multi-turn</td>
+    </tr>
+  </tbody>
+</table>
+
+:ET

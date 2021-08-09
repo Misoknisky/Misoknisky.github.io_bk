@@ -1,0 +1,77 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#methodology" id="markdown-toc-methodology">Methodology</a>    <ul>
+      <li><a href="#select-gold-documents" id="markdown-toc-select-gold-documents">Select gold documents</a></li>
+    </ul>
+  </li>
+  <li><a href="#answer-and-explain" id="markdown-toc-answer-and-explain">Answer and Explain</a></li>
+  <li><a href="#supporting-sentence-prediction" id="markdown-toc-supporting-sentence-prediction">Supporting sentence prediction</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+<p>在MRC任务中，可解释行的推理仍然是一个巨大的挑战，论文基于此提出了一个可解释的多跳MRC模型；</p>
+
+<h3 id="introduction">Introduction</h3>
+<ol>
+  <li>介绍了最近MRC取得的进展；这些技术在单文档ＭＲＣ任务上取得了不错的效果，但是这些模型缺乏文档间推理能力；</li>
+  <li>为了提高ＭＲＣ的推理的能力，目前主要有两个思路：第一是将单文档的技术移植到多文档上；另一个方向是利用图神经网络(GNN)实现跨多文档的多跳推理；这些技术虽然取得了一些效果，但是存在很多缺陷。第一缺乏可解释性；第二大部分模型使用所有文档数据，实际上文中多数数据对预测答案没有帮助；第三当前ＧＮＮ使用主要是使用实体作为图的节点，这种方法的通用性太差；</li>
+  <li>为了解决以上问题论文提出了ＳＡＥ模型；首先文章提出了一种新的分类模型对文档进行过滤（文中使用的是文档对的排名损失）；第二使用多任务框架进行答案预测和证据预测；</li>
+</ol>
+
+<h3 id="methodology">Methodology</h3>
+<ol>
+  <li>每一个exmaple:一个question,N 个document,  a set labeled support sentences from different documents; the answer text ,which couble be span or “YES/NO”;</li>
+  <li>if document is a gold doc labelled 1 otherwise 0; label three answer types:{span,yes,no}</li>
+</ol>
+
+<h4 id="select-gold-documents">Select gold documents</h4>
+<ol>
+  <li>对每一个document 构造输入为：[CLS] + question +[SEP]+document+[SEP]，使用BERT编码</li>
+  <li>常见的做法：直接使用[CLS] 进行分类任务；这种做法将每个文档单独考虑，忽略了文档之间交互</li>
+  <li>论文的改进做法：(a):对[CLS]使用MHSA（multi-head self attention) ，目的是通过question和document交互突出每个文档自身的信息，为文档间交互服务  （b) pairwise learning-to-rank；对golden document set $S(D)=1$ otherwise set $S(D)=0$,特别的如果golden document 包含answer text set $S(D)=2$;对于 $S(D_i)$和$S(D_j)$规定一下关系<br />
+\(l_{ij} =
+\begin{cases}
+1,  &amp; \text{if $S(D_i) \ge S(D_j)$} \\
+0, &amp; \text{$S(D_i) \leq S(D_j)$}
+\end{cases}\)</li>
+</ol>
+
+<p>l 函数表示$D_i$和 $D_j$之间的重要程度<br />
+将MHSA输出经过bi-linear layer 得到$P(D_i,D_j)$ 使用二元交叉熵损失函数
+\(L = -\sum_{i=0}^n\sum_{j=0}^{i-1}l_{ij} log p(D_i,D_j) + (1-l_{ij})log(1-p(D_i,D_j)\)</p>
+
+<h3 id="answer-and-explain">Answer and Explain</h3>
+
+<ol>
+  <li>Given the question and gold documents, we jointly train the answer prediction and supporting sentence classification in a multitask learning way. Note that at inference time we use the predicted gold documents.</li>
+  <li>将所有的golden documents  拼接成一个 context ，经BERT编码后得到$H={h_0,h_1,…,h_{L-1}}$,  使用MLP预测最终的span  $Y=f_{span}(H^i) \in R^{L \times 2}$，损失函数是交叉熵损失函数，这里将答案预测作为序列标注看待，而不是预测一个开始和结束位置：$Loss^{san}=\frac{1}{2}[CE(Y[:,0],y_{start}) + CE(Y[:,1],y_{end})]$</li>
+</ol>
+
+<h3 id="supporting-sentence-prediction">Supporting sentence prediction</h3>
+
+<ol>
+  <li>从H中获取每个句子的表示：$S^j=H[j^s:j^e,:] \in R^{l_j \times d}$ ,j表示第j个句子（一个example  包含多个句子)</li>
+  <li>
+    <p>答案一定是support sentence 但是support sentence 不一定是答案；因此论文将每个句子对应的答案概率作为句子attention 的一部分(从这也可以看出，只预测答案的开始和结束位置是不合适的)：$\alpha ^{j}= \sigma(f_{att}(S^j) + Y[j^s:j^e,0] + Y[j^s:j^e,1])$<br />
+$s^j=\sum_{k=0}^{L_j} \alpha_k^j S^j[k,:] \in R^{1*d}$<br />
+$f_att$是一个输出维度为1的两层MLP, 并且激活函数$\sigma$是softmax函数，接下来基于句子的表示$s^j$ 使用GCN预测support sentence</p>
+  </li>
+  <li>构造图添加一下三种类型的边：(a) 如果两个句子来自同一篇文章添加一条边；(b)来自不同文档的两个句子如果都包含来自问题的名词或者名词短语（两个句子包含的名词或者短语可以不一样）添加一条边；(c)来自不通文章的句子包含同样的名词或者名词短语添加一条边</li>
+  <li>
+    <p>we use multi-relational GCN with gating mechanism ，使用$s_j$初始化$h_j^0$<br />
+$h_j^(k+1) = act(u_j^K) \odot g_j^K + h_j^K \odot (1-g_j^K)$<br />
+$u_j^k=f_s(h_j^K) + \sum_{r \in R} \frac{1}{N_j^r}\sum_{n \in N_j^r}f_r(h_n^k)$<br />
+$g_j^K = sigmoid(f_g([h_j^k;h_j^k]))$<br />
+$R $表示边的关系集合, $N_j^r$ 表示节点j中关系为r的邻居节点；$h_n^k$表示节点n在第k层的表示 ，act 表示非线性的激活函数；$f_r,f_s,f_g$表示一种变换可以用MLP实现，经过多层GCN后得到最后的节点表示$h_j$，经过输出维度为1的两层的MLP得到最终的概率值
+$y_j^{sp}=sigmoid(f_{sp}(h_j))$</p>
+  </li>
+  <li>除此外，在GCN的最后一层增加了问题类型的分类任务（三类:{span,yes,no}),使用attention机制得到文档级的表示，使用另外两层MLP进行分类；
+$a=\sigma(y_{sp})$<br />
+$h=\sum_ja_jh_j$<br />
+$y^{ans}=f_{ans}(h)$</li>
+</ol>
+
+<p>最后的损失函数为：
+$L=\gamma L^{span} + BCE(y^{sp},y_{hat}^{sp})+ CE(y^{ans},y_{hat}^{ans})$</p>
+:ET

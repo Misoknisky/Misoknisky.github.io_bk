@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "transformer position"
+categories: transformer
+tags: transformer  position 
+author: admin
+---
+* content
+{:toc}
+
+### Transformer
+transformer去除位置编码后会怎样？transformer 主要结构是multi-head attention 和FFN。设去除位置后的transformer 为一个函数 $f$  . 假设输入句子长度为n, 那么$f$函数有这样的特点： 打乱输入序列，每个词编码后的结果是不变的（这是不合理的）。
+
+原因在于attention 机制。假设q:
+$$
+\begin{bmatrix}
+\alpha_1^t \\ \alpha_2^t \\ \alpha_3^t \\ \alpha_4^t
+\end{bmatrix}
+$$
+
+假设k,v为: $ [ \beta_1,  \beta_2,  \beta_3 ] $ 均为列向量; 假设词的隐藏层维度为$d$  
+那么正常情况下score 矩阵：
+$$
+\begin{bmatrix}
+\alpha_1^t \\ \alpha_2^t \\ \alpha_3^t \\ \alpha_4^t
+\end{bmatrix}  [ \beta_1,  \beta_2,  \beta_3 ] =
+\begin{bmatrix}
+\alpha_1^t \beta_1 & \alpha_1^t \beta_2 &\alpha_1^t \beta_3  \\ \alpha_2^t \beta_1 & \alpha_2^t \beta_2 & \alpha_2^t \beta_3 \\ \alpha_3^t \beta_1 & \alpha_3^t \beta_2 & \alpha_3^t \beta_3 \\ \alpha_4^t \beta_1 & \alpha_4^t \beta_2 & \alpha_4^t \beta_3 \\
+\end{bmatrix}
+$$
+
+正常情况下score *v结果为：
+$$
+\begin{bmatrix}
+\alpha_1^t \beta_1 & \alpha_1^t \beta_2 &\alpha_1^t \beta_3  \\ \alpha_2^t \beta_1 & \alpha_2^t \beta_2 & \alpha_2^t \beta_3 \\ \alpha_3^t \beta_1 & \alpha_3^t \beta_2 & \alpha_3^t \beta_3 \\ \alpha_4^t \beta_1 & \alpha_4^t \beta_2 & \alpha_4^t \beta_3 \\
+\end{bmatrix} 
+\begin{bmatrix}
+\beta_1^t \\ \beta_2^t \\  \beta_3^t
+\end{bmatrix}
+$$
+
+可以写成：
+$$
+\begin{bmatrix}
+\alpha_1^t \\ \alpha_2^t \\ \alpha_3^t \\ \alpha_4^t
+\end{bmatrix}  [ \beta_1,  \beta_2,  \beta_3 ] 
+\begin{bmatrix}
+\beta_1^t \\ \beta_2^t \\  \beta_3^t
+\end{bmatrix}
+$$
+假设我们交换了src中两个词的位置；比如k,v中 $ [ \beta_1,  \beta_3,  \beta_2 ] $；根据矩阵乘法结合律可以得到：
+$$
+\begin{bmatrix}
+\alpha_1^t \\ \alpha_2^t \\ \alpha_3^t \\ \alpha_4^t
+\end{bmatrix}  [ \beta_1,  \beta_3,  \beta_2 ] 
+\begin{bmatrix}
+\beta_1^t \\ \beta_3^t \\  \beta_2^t
+\end{bmatrix}
+$$
+
+也就是说当我们交换两个词的位置时，对应结果位置也会发生相应变化，在其它条件不变的情况下，每个词的编码结果是不变的  ；在序列任务中显然这是不合理的。去除掉位置编码后，transformer模型是无法学习到句子的序列结构的。加入位置编码后可以打破这种对称关系:$f(x,y) \neq f(y,x)$ 。

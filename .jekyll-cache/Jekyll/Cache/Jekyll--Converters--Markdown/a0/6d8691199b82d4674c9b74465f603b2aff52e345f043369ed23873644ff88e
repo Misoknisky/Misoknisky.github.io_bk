@@ -1,0 +1,72 @@
+I"$<ul id="markdown-toc">
+  <li><a href="#关于我" id="markdown-toc-关于我">关于我</a></li>
+  <li><a href="#联系我" id="markdown-toc-联系我">联系我</a>    <ul>
+      <li><a href="#参加比赛排名具有时效性" id="markdown-toc-参加比赛排名具有时效性">参加比赛(排名具有时效性)：</a></li>
+      <li><a href="#publications" id="markdown-toc-publications">PUBLICATIONS</a></li>
+    </ul>
+  </li>
+  <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
+</ul>
+
+<h2 id="关于我">关于我</h2>
+
+<ul>
+  <li>东北大学NLP(2017-2020.1)</li>
+  <li>
+    <p>东北大学数据挖掘课题组(2020.9-至今)</p>
+  </li>
+  <li>
+    <p>研究领域：自然语言处理</p>
+  </li>
+  <li>研究方向：机器阅读理解 对话系统</li>
+</ul>
+
+<h2 id="联系我">联系我</h2>
+
+<ul>
+  <li>GitHub：<a href="https://github.com/Misoknisky">Misoknisky</a></li>
+  <li>email：misonsky@163.com</li>
+</ul>
+
+<h3 id="参加比赛排名具有时效性">参加比赛(排名具有时效性)：</h3>
+<blockquote>
+  <p>2018.05 百度机器阅读理解竞赛 第三 <a href="http://mrc2018.cipsc.org.cn/">2018MRC</a><br />
+2018.07 CCKS2018 问句匹配任务 第一 <a href="https://www.biendata.xyz/competition/CCKS2018_3/leaderboard/">CCKS2018</a><br />
+2019.06  Triviaqa 阅读理解 第一名  <a href="https://competitions.codalab.org/competitions/17208#results">Triviaqa</a><br />
+2019.09 Squad1.0 第三 Squad2.0（十二名）<a href="https://rajpurkar.github.io/SQuAD-explorer/">Squad</a><br />
+2019.12 百度机器阅读理解模型改进  第三 <a href="http://ai.baidu.com/broad/leaderboard">2018MRC</a><br />
+2020.05 百度机器阅读理解竞赛 第三  <a href="https://aistudio.baidu.com/aistudio/competition/detail/28">2020MRC</a><br />
+2020.07 MuTual and $\text{MuTual}^{plus}$  第一 <a href="https://nealcly.github.io/MuTual-leaderboard/">2020MuTual</a></p>
+</blockquote>
+
+<h3 id="publications">PUBLICATIONS</h3>
+<ul>
+  <li>Yongkang Liu, Shi Feng, Daling Wang, Kaisong Song, Feiliang Ren, Yifei Zhang: A Graph Reasoning Network for Multi-turn Response Selection via Customized Pre-training. Accepted by AAAI 2021</li>
+  <li>Feiliang Ren，Di ZHou，Zhihui Liu，Yongcheng Li，Rongsheng Zhao，Yongkang Liu，Xiaobo Liang Neural Relation Classification with Text Descriptions. COLING2018, pp:1167-1177.</li>
+  <li>梁小波，任飞亮，刘永康，潘凌峰，侯依宁，张熠，李妍 N-Reader：基于双层self-attention的机器阅读理解模型. 中文信息学报</li>
+  <li>刘永康, 梁小波, 任飞亮, 李妍，侯依宁，张熠，潘凌峰 An Enhanced ESIM Model for Sentence Pair Matching with Self-Attention. Proceedings of the Evaluation Tasks at the China Conference on Knowledge Graph and Semantic Computing (CCKS 2018)</li>
+  <li>任飞亮，侯依宁, 李妍, 潘凌峰, 张熠,  梁小波, 刘永康, 郭宇, 赵荣生, 明瑞成, 吴慧敏(共同第二作者) TechKG: A Large-Scale Chinese Technology-Oriented Knowledge Graph</li>
+  <li>潘凌峰 ,张熠，任飞亮，侯依宁，李妍，梁小波，刘永康 A Multiple Utterances based Neural Network Model for Joint Intent Detection and Slot Filling. Proceedings of the Evaluation Tasks at the China Conference on Knowledge Graph and Semantic Computing</li>
+</ul>
+
+<h2 id="comments">Comments</h2>
+
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css" />
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+<script>
+    var gitment = new Gitment({
+		id: '<%= page.date %>',
+        owner: 'Misoknisky',
+        repo: 'Misoknisky.github.io',
+        oauth: {
+            client_id: '6960975f7ee1b52c7564',
+            client_secret: '728532421ca82bd6177f2d648de50479d827b3af',
+        },
+    });
+    gitment.render('gitmentContainer')
+</script>
+
+:ET

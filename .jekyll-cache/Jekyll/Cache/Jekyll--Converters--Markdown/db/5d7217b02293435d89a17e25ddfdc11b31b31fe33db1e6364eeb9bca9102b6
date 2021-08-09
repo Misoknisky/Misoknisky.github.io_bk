@@ -1,0 +1,25 @@
+I"+<ul id="markdown-toc">
+  <li><a href="#论文" id="markdown-toc-论文">论文</a></li>
+  <li><a href="#动机---贡献" id="markdown-toc-动机---贡献">动机 &amp;  贡献</a></li>
+  <li><a href="#模型结构" id="markdown-toc-模型结构">模型结构</a></li>
+</ul>
+
+<h3 id="论文">论文</h3>
+<p>Improving Question Answering with External Knowledge</p>
+
+<h3 id="动机---贡献">动机 &amp;  贡献</h3>
+<p>论文主要面向多选形式的MRC任务</p>
+<blockquote>
+  <ol>
+    <li>使用外部的文本知识提高MRC性能</li>
+    <li>使用额外数据提高MRC性能</li>
+  </ol>
+</blockquote>
+
+<h3 id="模型结构">模型结构</h3>
+<p><img src="../img/qaek.png" alt="qaek" title="Improving Question Answering with External Knowledge" /></p>
+
+<p>from question and options extract concepts , then link these concepts to open-domain resource. 论文中只考虑名词</p>
+
+<p>对于每一个question-option pair中的concept 从开放语料中抽取包含对应concept  的句子，使用预训练的语言模型比如BERT、GPT等作为Baseline.</p>
+:ET

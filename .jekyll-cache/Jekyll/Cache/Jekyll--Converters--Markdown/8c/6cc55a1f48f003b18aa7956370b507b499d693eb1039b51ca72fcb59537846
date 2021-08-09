@@ -1,0 +1,31 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#作图" id="markdown-toc-作图">作图</a>    <ul>
+      <li><a href="#基本形状" id="markdown-toc-基本形状">基本形状</a></li>
+      <li><a href="#箭头" id="markdown-toc-箭头">箭头</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="作图">作图</h3>
+<h4 id="基本形状">基本形状</h4>
+<p>指定流程图的方向
+LR，RL，TB、BT</p>
+<pre><code class="language-mermaid">graph LR
+A["$ A_1 $"]
+B(圆角方形)
+C{棱形}
+D((圆形))
+E&gt;不对称图形]
+</code></pre>
+<h4 id="箭头">箭头</h4>
+<pre><code class="language-mermaid">graph LR
+A1[A] --&gt; B1[B]
+A2[A] --- B2[B]
+A3[A] -.- B3[B]
+A4[A] -.-&gt; B4[B]
+A5[A] ==&gt; B5[B]
+A6[A] -- 注释 --&gt; B6[B]
+A7[A] -- 注释 -- B7[B]
+</code></pre>
+
+:ET

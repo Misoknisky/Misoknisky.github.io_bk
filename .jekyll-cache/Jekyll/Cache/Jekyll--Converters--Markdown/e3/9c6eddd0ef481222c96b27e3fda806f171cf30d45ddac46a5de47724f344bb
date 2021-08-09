@@ -1,0 +1,34 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#语言模型" id="markdown-toc-语言模型">语言模型</a></li>
+</ul>
+<h2 id="语言模型">语言模型</h2>
+<table>
+	<tr>
+		<td>题目</td>
+		<td>链接</td>
+	</tr>
+    <tr>
+		<td>Distributed Representations of Words and Phrases and their Compositionality</td>
+		<td><a href="https://arxiv.org/abs/1310.4546">Word2Vector</a></td>
+    </tr>
+</table>
+
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://www.wenjunjiang.win/css/gitment.css" />
+
+<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+
+<script>
+    var gitment = new Gitment({
+		id: '<%= page.date %>',
+        owner: 'Misoknisky',
+        repo: 'Misoknisky.github.io',
+        oauth: {
+            client_id: '6960975f7ee1b52c7564',
+            client_secret: '728532421ca82bd6177f2d648de50479d827b3af',
+        },
+    });
+    gitment.render('gitmentContainer')
+</script>
+
+:ET

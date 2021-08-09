@@ -1,0 +1,311 @@
+I"D<ul id="markdown-toc">
+  <li><a href="#classic-datasets" id="markdown-toc-classic-datasets">Classic Datasets</a>    <ul>
+      <li><a href="#performance" id="markdown-toc-performance">Performance</a></li>
+      <li><a href="#snli" id="markdown-toc-snli">SNLI</a></li>
+      <li><a href="#mnli" id="markdown-toc-mnli">MNLI</a></li>
+      <li><a href="#scitail" id="markdown-toc-scitail">SciTail</a></li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Natural Language Inference</strong> is the task of determining whether a “hypothesis” is true (entailment), false (contradiction), or undetermined (neutral) given a “premise”.</p>
+
+<h2 id="classic-datasets">Classic Datasets</h2>
+
+<table style="width: 300px; margin-left: auto; margin-right: auto;">
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th># sentence pair</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://arxiv.org/abs/1508.05326"><strong>SNLI</strong></a></td>
+      <td>570K</td>
+    </tr>
+    <tr>
+      <td><a href="https://arxiv.org/abs/1704.05426"><strong>MultiNLI</strong></a></td>
+      <td>433K</td>
+    </tr>
+    <tr>
+      <td><a href="http://ai2-website.s3.amazonaws.com/publications/scitail-aaai-2018_cameraready.pdf"><strong>SciTail</strong></a></td>
+      <td>27K</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/1508.05326"><strong>SNLI</strong></a> is the short of Stanford Natural Language Inference, which has 570k human annotated sentence pairs. Thre premise data is draw from the captions of the Flickr30k corpus, and the hypothesis data is manually composed.</li>
+  <li><a href="https://arxiv.org/abs/1704.05426"><strong>MultiNLI</strong></a> is short of Multi-Genre NLI, which has 433k sentence pairs, whose collection process and task detail are modeled closely to SNLI. The premise data is collected from maximally broad range of genre of American English such as non-fiction genres (SLATE, OUP, GOVERNMENT, VERBATIM, TRAVEL), spoken genres (TELEPHONE, FACE-TO-FACE), less formal written genres (FICTION, LETTERS) and a specialized one for 9/11.</li>
+  <li><a href="http://ai2-website.s3.amazonaws.com/publications/scitail-aaai-2018_cameraready.pdf"><strong>SciTail</strong></a> entailment dataset consists of 27k. In contrast to the SNLI and MultiNLI, it was not crowd-sourced but created from sentences that already exist “in the wild”. Hypotheses were created from science questions and the corresponding answer candidates, while relevant web sentences from a large corpus were used as premises.</li>
+</ul>
+
+<h3 id="performance">Performance</h3>
+
+<h3 id="snli">SNLI</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th style="text-align: center">Code</th>
+      <th>Accuracy</th>
+      <th>Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Match-LSTM (Wang et al. ,2016)</td>
+      <td style="text-align: center"><a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/matchlstm.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>86.1</td>
+      <td><a href="https://www.aclweb.org/anthology/N16-1170.pdf">Learning Natural Language Inference with LSTM</a></td>
+    </tr>
+    <tr>
+      <td>Decomposable (Parikh et al., 2016)</td>
+      <td style="text-align: center">—</td>
+      <td>86.3/86.8(Intra-sentence attention)</td>
+      <td><a href="https://arxiv.org/pdf/1606.01933.pdf">A Decomposable Attention Model for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>BiMPM (Wang et al., 2017)</td>
+      <td style="text-align: center"><a href="https://zhiguowang.github.io/"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/bimpm.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>86.9</td>
+      <td><a href="https://arxiv.org/pdf/1702.03814.pdf">Bilateral Multi-Perspective Matching for Natural Language Sentences</a></td>
+    </tr>
+    <tr>
+      <td>Shortcut-Stacked BiLSTM (Nie et al., 2017)</td>
+      <td style="text-align: center"><a href="https://github.com/easonnie/multiNLI_encoder"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>86.1</td>
+      <td><a href="https://arxiv.org/pdf/1708.02312.pdf">Shortcut-Stacked Sentence Encoders for Multi-Domain Inference</a></td>
+    </tr>
+    <tr>
+      <td>ESIM (Chen et al., 2017)</td>
+      <td style="text-align: center"><a href="https://github.com/lukecq1231/nli"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/esim.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>88.0/88.6(Tree-LSTM)</td>
+      <td><a href="https://arxiv.org/pdf/1609.06038.pdf">Enhanced LSTM for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>DIIN (Gong et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/YichenGong/Densely-Interactive-Inference-Network"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/diin.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>88.0</td>
+      <td><a href="https://arxiv.org/pdf/1709.04348.pdf">Natural Language Inference over Interaction Space</a></td>
+    </tr>
+    <tr>
+      <td>SAN (Liu et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.7</td>
+      <td><a href="https://arxiv.org/pdf/1804.07888.pdf">Stochastic Answer Networks for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>AF-DMN (Duan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.6</td>
+      <td><a href="https://www.ijcai.org/Proceedings/2018/0561.pdf">Attention-Fused Deep Matching Network for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>MwAN (Tan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.3</td>
+      <td><a href="https://www.ijcai.org/Proceedings/2018/0613.pdf">Multiway Attention Networks for Modeling Sentence Pairs</a></td>
+    </tr>
+    <tr>
+      <td>HBMP (Talman et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/Helsinki-NLP/HBMP"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/hbmp.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>86.6</td>
+      <td><a href="https://arxiv.org/pdf/1808.08762v1.pdf">Natural Language Inference with Hierarchical BiLSTM Max Pooling Architecture</a></td>
+    </tr>
+    <tr>
+      <td>CAFE (Tay et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.5</td>
+      <td><a href="https://arxiv.org/pdf/1801.00102v2.pdf">Compare, Compress and Propagate: Enhancing Neural Architectures with Alignment Factorization for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>DSA (Yoon et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>86.8</td>
+      <td><a href="https://arxiv.org/pdf/1808.07383.pdf">Dynamic Self-Attention: Computing Attention over Words Dynamically for Sentence Embedding</a></td>
+    </tr>
+    <tr>
+      <td>Enhancing Sentence Embedding with Generalized Pooling (Chen et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/lukecq1231/generalized-pooling"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>86.6</td>
+      <td><a href="https://arxiv.org/pdf/1806.09828.pdf?source=post_page---------------------------">Enhancing Sentence Embedding with Generalized Pooling</a></td>
+    </tr>
+    <tr>
+      <td>ReSAN (Shen et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/taoshen58/DiSAN/tree/master/ReSAN"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>86.3</td>
+      <td><a href="https://arxiv.org/pdf/1801.10296.pdf">Reinforced Self-Attention Network: a Hybrid of Hard and Soft Attention for Sequence Modeling</a></td>
+    </tr>
+    <tr>
+      <td>DMAN (Pan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.8</td>
+      <td><a href="https://www.aclweb.org/anthology/P18-1091.pdf">Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>DRCN (Kim et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>90.1</td>
+      <td><a href="https://www.aaai.org/ojs/index.php/AAAI/article/download/4627/4505">Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information</a></td>
+    </tr>
+    <tr>
+      <td>RE2 (Yang et al., 2019)</td>
+      <td style="text-align: center"><a href="https://github.com/hitvoice/RE2"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/dev/matchzoo/models/re2.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>88.9</td>
+      <td><a href="https://arxiv.org/pdf/1908.00300.pdf">Simple and Effective Text Matching with Richer Alignment Features</a></td>
+    </tr>
+    <tr>
+      <td>MT-DNN (Liu et al., 2019)</td>
+      <td style="text-align: center"><a href="https://github.com/namisan/mt-dnn"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td><strong>91.1(base)/91.6(large)</strong></td>
+      <td><a href="https://arxiv.org/pdf/1901.11504.pdf">Multi-Task Deep Neural Networks for Natural Language Understanding</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="mnli">MNLI</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th style="text-align: center">Code</th>
+      <th>Matched  Accuracy</th>
+      <th>Mismatched Accuracy</th>
+      <th>Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ESIM (Chen et al., 2017)</td>
+      <td style="text-align: center"><a href="https://github.com/lukecq1231/nli"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/esim.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>76.8</td>
+      <td>75.8</td>
+      <td><a href="https://arxiv.org/pdf/1708.01353.pdf">Recurrent Neural Network-Based Sentence Encoder with Gated Attention for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>Shortcut-Stacked BiLSTM (Nie et al., 2017)</td>
+      <td style="text-align: center"><a href="https://github.com/easonnie/multiNLI_encoder"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>74.6</td>
+      <td>73.6</td>
+      <td><a href="https://arxiv.org/pdf/1708.02312.pdf">Shortcut-Stacked Sentence Encoders for Multi-Domain Inference</a></td>
+    </tr>
+    <tr>
+      <td>HBMP (Talman et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/Helsinki-NLP/HBMP"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/hbmp.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>73.7</td>
+      <td>73.0</td>
+      <td><a href="https://arxiv.org/pdf/1808.08762v1.pdf">Natural Language Inference with Hierarchical BiLSTM Max Pooling Architecture</a></td>
+    </tr>
+    <tr>
+      <td>Generalized Pooling (Chen et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/lukecq1231/generalized-pooling"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td>73.8</td>
+      <td>74.0</td>
+      <td><a href="https://arxiv.org/pdf/1806.09828.pdf?source=post_page---------------------------">Enhancing Sentence Embedding with Generalized Pooling</a></td>
+    </tr>
+    <tr>
+      <td>AF-DMN (Duan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>76.9</td>
+      <td>76.3</td>
+      <td><a href="https://www.ijcai.org/Proceedings/2018/0561.pdf">Attention-Fused Deep Matching Network for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>DIIN (Gong et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/YichenGong/Densely-Interactive-Inference-Network"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a>  <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/diin.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>78.8</td>
+      <td>77.8</td>
+      <td><a href="https://github.com/YichenGong/Densely-Interactive-Inference-Network">Natural Language Inference over Interaction Space</a></td>
+    </tr>
+    <tr>
+      <td>SAN (Liu et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td><strong>79.3</strong></td>
+      <td><strong>78.7</strong></td>
+      <td><a href="https://arxiv.org/pdf/1804.07888.pdf">Stochastic Answer Networks for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>MwAN (Tan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>78.5</td>
+      <td>77.7</td>
+      <td><a href="https://www.ijcai.org/Proceedings/2018/0613.pdf">Multiway Attention Networks for Modeling Sentence Pairs</a></td>
+    </tr>
+    <tr>
+      <td>CAFE (Tay et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>78.7</td>
+      <td>77.9</td>
+      <td><a href="https://arxiv.org/pdf/1801.00102v2.pdf">Compare, Compress and Propagate: Enhancing Neural Architectures with Alignment Factorization for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>DRCN (Kim et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>79.1</td>
+      <td>78.4</td>
+      <td><a href="https://www.aaai.org/ojs/index.php/AAAI/article/download/4627/4505">Semantic Sentence Matching with Densely-connected Recurrent and Co-attentive Information</a></td>
+    </tr>
+    <tr>
+      <td>DMAN (Pan et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>78.9</td>
+      <td>78.2</td>
+      <td><a href="https://www.aclweb.org/anthology/P18-1091.pdf">Discourse Marker Augmented Network with Reinforcement Learning for Natural Language Inference</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="scitail">SciTail</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th style="text-align: center">Code</th>
+      <th>Accuracy</th>
+      <th>Paper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SAN (Liu et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>88.4</td>
+      <td><a href="https://arxiv.org/pdf/1804.07888.pdf">Stochastic Answer Networks for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>HCRN (Tay et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>80.0</td>
+      <td><a href="https://www.ijcai.org/Proceedings/2018/0615.pdf">Hermitian Co-Attention Networks for Text Matching in Asymmetrical Domains</a></td>
+    </tr>
+    <tr>
+      <td>HBMP (Talman et al., 2018)</td>
+      <td style="text-align: center"><a href="https://github.com/Helsinki-NLP/HBMP"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/master/matchzoo/models/hbmp.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>86.0</td>
+      <td><a href="https://arxiv.org/pdf/1808.08762v1.pdf">Natural Language Inference with Hierarchical BiLSTM Max Pooling Architecture</a></td>
+    </tr>
+    <tr>
+      <td>CAFE (Tay et al., 2018)</td>
+      <td style="text-align: center">—</td>
+      <td>83.3</td>
+      <td><a href="https://arxiv.org/pdf/1801.00102v2.pdf">Compare, Compress and Propagate: Enhancing Neural Architectures with Alignment Factorization for Natural Language Inference</a></td>
+    </tr>
+    <tr>
+      <td>RE2 (Yang et al., 2019)</td>
+      <td style="text-align: center"><a href="https://github.com/hitvoice/RE2"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a> <a href="https://github.com/NTMC-Community/MatchZoo-py/blob/dev/matchzoo/models/re2.py"><img src="https://img.shields.io/badge/matchzoo-ready-green" alt="MatchZoo" /></a></td>
+      <td>86.0</td>
+      <td><a href="https://arxiv.org/pdf/1908.00300.pdf">Simple and Effective Text Matching with Richer Alignment Features</a></td>
+    </tr>
+    <tr>
+      <td>MT-DNN (Liu et al., 2019)</td>
+      <td style="text-align: center"><a href="https://github.com/namisan/mt-dnn"><img src="https://img.shields.io/badge/official-code-brightgreen" alt="official" /></a></td>
+      <td><strong>94.1(base)/95.0(large)</strong></td>
+      <td><a href="https://arxiv.org/pdf/1901.11504.pdf">Multi-Task Deep Neural Networks for Natural Language Understanding</a></td>
+    </tr>
+  </tbody>
+</table>
+:ET

@@ -1,0 +1,23 @@
+I"Q<ul id="markdown-toc">
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#datasets" id="markdown-toc-datasets">Datasets</a></li>
+  <li><a href="#model-structure" id="markdown-toc-model-structure">Model Structure</a></li>
+</ul>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>会话的过程可以被认为是：utterrance dependency and token-level dependency</p>
+
+\[P_\theta\{U_1,U_2,...,U_m\}=\prod_{m=1}^{M} P(U_m | U_{&lt;m})
+							=\prod_{m=1}^{M} \prod_{n=1}^{N_m} P_\theta(W_{m,n}|W_{m,&lt;n},U_{&lt;m})\]
+
+<p>先前的工作将会话看作是马尔科夫链的决策过程，但是需要人工特征，甚至需要人参与，工作量大、耗时</p>
+
+<p>本文使用层级的RNN，从utterance-level 和token-level 级别建模utterance 之间的复杂依赖关系（utterance-level on time and token -level on time)</p>
+
+<h3 id="datasets">Datasets</h3>
+<p>本文使用的数据集只有两种角色，3个utterances</p>
+
+<h3 id="model-structure">Model Structure</h3>
+<p><img src="../img/hred.png" alt="HRED" title="Hierarchical Neural Network Models" /></p>
+:ET
